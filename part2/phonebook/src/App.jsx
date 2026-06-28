@@ -57,9 +57,34 @@ const App = () => {
   }
   const handleButtonSubmit = (event) => {
     event.preventDefault()
-    const nameExists = persons.find(person => person.name.toLowerCase() === newName.toLocaleLowerCase())
-    if (nameExists)
-      window.alert(`${newName} is already added to the phonebook`)
+    const oldEntry = persons.find(person => person.name.toLowerCase() === newName.toLocaleLowerCase())
+
+    if (oldEntry) {
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const updatedPhonebookEntry = { ...oldEntry, number: newNumber }
+        console.log('modified entry is ', updatedPhonebookEntry)
+        phoneSVC.updateEntry(oldEntry.id, updatedPhonebookEntry).then(response => {
+          console.log("updated entry is ", response.data)
+
+          const newArray = persons.map(person => {
+
+            console.log(person.name.toLowerCase())
+            console.log(response.data.name.toLowerCase())
+            console.log(person.name.toLowerCase() !== response.data.name.toLowerCase())
+            return person.name.toLowerCase() !== response.data.name.toLowerCase() ? person : response.data
+          })
+          console.log("new array is ", newArray)
+          setPersons(newArray)
+        })
+
+
+      }
+      else {
+
+        console.log("user chose not to modify the entry")
+      }
+
+    }
 
     else {
       console.log("name to be added to the phonebook is ", newName)

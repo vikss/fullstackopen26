@@ -14,8 +14,13 @@ const create = (newObject) => {
 }
 const deleteEntry = (id) => {
 
-    return axios.delete(`http://localhost:3001/persons/${id}`)
+    return axios.delete(`${URL}/${id}`)
 
 }
+const updateEntry = (id, updatedEntry) => {
+    console.log("id is ", id)
 
-export default { getAll, create, deleteEntry }
+    return axios.put(`${URL}/${id}`, updatedEntry)
+}
+
+export default { getAll, create, deleteEntry, updateEntry }
