@@ -1,7 +1,7 @@
 import Person from "./Person"
 import SearchFilter from "./Filter"
 
-const Persons = ({ persons, filterValue }) => {
+const Persons = ({ persons, filterValue, handleDeleteButton }) => {
 
 
    const filteredArray = persons.filter(p => {
@@ -10,7 +10,7 @@ const Persons = ({ persons, filterValue }) => {
       return p.name.toLowerCase().includes(filterValue.toLowerCase())
    })
 
-   return filteredArray.map(person => <Person person={person}></Person>)
+   return filteredArray.map(person => <Person person={person} key={person.id} handleDeleteButton={handleDeleteButton}></Person>)
 }
 
 

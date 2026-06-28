@@ -1,8 +1,8 @@
-const Person = ({ person }) => {
+const Person = ({ person, handleDeleteButton }) => {
 
+   console.log("Person's id is ", person.id)
 
-
-   return <li key={person.name}>{person.name} {person.number}</li>
+   return <li>{person.name} {person.number} <button type="submit" onClick={handleDeleteButton} value={person.id}>delete</button></li>
 }
 
 
