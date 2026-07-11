@@ -75,7 +75,7 @@ const App = () => {
 
           console.log(`Information of ${newName} has already been removed from server`)
           setNewNotification(`Information of ${newName} has already been removed from server`)
-          setTimeout(()=>setNewNotification(''), 5000)
+          setTimeout(() => setNewNotification(''), 5000)
           console.log(error)
 
         })
