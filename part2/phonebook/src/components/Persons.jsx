@@ -5,7 +5,6 @@ const Persons = ({ persons, filterValue, handleDeleteButton }) => {
 
 
    const filteredArray = persons.filter(p => {
-      console.log("entry is ", p.name)
 
       return p.name.toLowerCase().includes(filterValue.toLowerCase())
    })

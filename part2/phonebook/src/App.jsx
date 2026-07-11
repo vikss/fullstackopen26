@@ -4,12 +4,14 @@ import Filter from './components/Filter.jsx'
 import PersonForm from './components/PersonForm.jsx'
 import axios from 'axios'
 import phoneSVC from './services/phone.js'
+import Notification from './components/Notification.jsx'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterValue, setNewFilterValue] = useState('')
+  const [notification, setNewNotification] = useState('')
 
   useEffect(() => {
     console.log("in the useffect hook")
@@ -26,12 +28,10 @@ const App = () => {
 
   const handleNameChange = (event) => {
 
-    console.log("value in the name input field is ", event.target.value)
     setNewName(event.target.value)
   }
   const handleNumberChange = (event) => {
 
-    console.log("value in the number input field is ", event.target.value)
     setNewNumber(event.target.value)
   }
   const handleFilterChange = (event) => {
@@ -67,14 +67,17 @@ const App = () => {
           console.log("updated entry is ", response.data)
 
           const newArray = persons.map(person => {
-
-            console.log(person.name.toLowerCase())
-            console.log(response.data.name.toLowerCase())
-            console.log(person.name.toLowerCase() !== response.data.name.toLowerCase())
             return person.name.toLowerCase() !== response.data.name.toLowerCase() ? person : response.data
           })
           console.log("new array is ", newArray)
           setPersons(newArray)
+        }).catch(error => {
+
+          console.log(`Information of ${newName} has already been removed from server`)
+          setNewNotification(`Information of ${newName} has already been removed from server`)
+          setTimeout(()=>setNewNotification(''), 5000)
+          console.log(error)
+
         })
 
 
@@ -94,6 +97,8 @@ const App = () => {
 
         console.log("The response of the post request is ", response)
         setPersons(persons.concat(response.data))
+        setNewNotification(`Added ${newName}`)
+        setTimeout(() => setNewNotification(''), 5000)
 
       })
 
@@ -108,6 +113,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification}></Notification>
       <Filter value={filterValue} handleFilterChange={handleFilterChange}></Filter>
       <h3>Add a new</h3>
 
