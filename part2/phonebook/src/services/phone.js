@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-const URL = "/api/persons"
+const URL = "http://localhost:3001/persons"
 
 const getAll = () => {
      
     console.log("Fetching all the phonebook entries from ",URL)
+    //console.log(axios.get(URL).then(res=>console.log(res)))
     return axios.get(URL)
 
 }
