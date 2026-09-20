@@ -3,7 +3,8 @@ import axios from 'axios'
 const URL = "/api/persons"
 
 const getAll = () => {
-
+     
+    console.log("Fetching all the phonebook entries from ",URL)
     return axios.get(URL)
 
 }
