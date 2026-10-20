@@ -3,11 +3,12 @@ import morgan from 'morgan'
 import cors from 'cors'
 
 
-
+require('dotenv').config()
 const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(express.static('dist'))
+const Entry = require('./models/mongo')
 morgan.token('content', (req, res)=>{
 
 
@@ -40,8 +41,10 @@ let entries = [
 
 app.get("/api/persons", (req, res) => {
 
-    res.json(entries)
+    //res.json(entries)
 
+
+    Entry.find({}).then(entries=>res.json(entries))
 
 })
 app.get("/api/persons/:id", (req, res) => {
