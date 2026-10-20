@@ -2,13 +2,13 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import Entry from "./models/mongo"
 
 dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(express.static('dist'))
-const Entry = require('./models/mongo')
 morgan.token('content', (req, res)=>{
 
 
