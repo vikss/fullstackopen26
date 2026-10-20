@@ -50,4 +50,6 @@ noteSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model("Entry", entrySchema)
+
+const EntryModel = mongoose.model("Entry", entrySchema)
+export default {EntryModel}

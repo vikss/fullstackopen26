@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import Entry from "./models/mongo"
+import EntryModel from "./models/mongo.js"
 
 dotenv.config()
 const app = express()
@@ -44,7 +44,7 @@ app.get("/api/persons", (req, res) => {
     //res.json(entries)
 
 
-    Entry.find({}).then(entries=>res.json(entries))
+    EntryModel.find({}).then(entries=>res.json(entries))
 
 })
 app.get("/api/persons/:id", (req, res) => {
